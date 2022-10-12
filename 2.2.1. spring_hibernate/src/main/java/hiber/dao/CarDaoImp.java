@@ -23,7 +23,7 @@ public class CarDaoImp implements CarDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Car> listCars() {
+    public List<Car> getListCars() {
         TypedQuery<Car> query = sessionFactory.getCurrentSession().createQuery("from Car");
         return query.getResultList();
     }
@@ -31,7 +31,7 @@ public class CarDaoImp implements CarDao {
     @Override
     public User getUserByCarModelAndSeries(String model, int series) {
         User user = new User();
-        for (Car car : listCars()) {
+        for (Car car : getListCars()) {
             if (car.getModel().equals(model) && car.getSeries() == series) {
                 long x = car.getId();
                 Query query = sessionFactory.getCurrentSession().createQuery("from User where id = :paramName");
