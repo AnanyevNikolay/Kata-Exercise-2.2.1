@@ -24,22 +24,7 @@ public class CarDaoImp implements CarDao {
     @Override
     @SuppressWarnings("unchecked")
     public List<Car> getListCars() {
-        TypedQuery<Car> query = sessionFactory.getCurrentSession().createQuery("from Car");
+        TypedQuery<Car> query = sessionFactory.getCurrentSession().createQuery("FROM Car");
         return query.getResultList();
     }
-
-    @Override
-    public User getUserByCarModelAndSeries(String model, int series) {
-        User user = new User();
-        for (Car car : getListCars()) {
-            if (car.getModel().equals(model) && car.getSeries() == series) {
-                long x = car.getId();
-                Query query = sessionFactory.getCurrentSession().createQuery("from User where id = :paramName");
-                query.setParameter("paramName", x);
-                user = (User) query.getSingleResult();
-            }
-        }
-        return user;
-    }
-
 }
